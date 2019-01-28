@@ -1,0 +1,91 @@
+<?php
+$this->headTitle('Domains');
+
+//$this->mainMenu()->setActiveItemId('contacts');
+
+?>
+
+<div class="container-fluid">
+
+    <div class="row">
+
+        <div class="col-8">
+            <h1>Users</h1>
+        </div>
+
+        <div class="col-4">
+            <a class="btn btn-primary float-right" href="<?= $this->url('user', ['action' => 'add']); ?>">
+                <span class="fa fa-plus"></span>&nbsp; Add User
+            </a>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-12">
+
+            <hr>
+
+            <table id="contactDataTable" class="display table table-striped" style="width:100%">
+
+                <thead>
+
+                <tr>
+                    <th>Domain</th>
+                    <th>Username</th>
+                    <th>Status</th>
+                    <th>&nbsp;</th>
+                </tr>
+
+                </thead>
+
+                <tbody>
+                <?php
+                foreach ($users as $user) {
+                    print '<tr>';
+
+                    print '<td>';
+                    print $user->getDomain()->getName();
+                    print '</td>';
+
+                    print '<td>';
+                    print $user->getUsername();
+                    print '</td>';
+
+                    print '<td>';
+                    print $user->getStatusAsString();
+                    print '</td>';
+
+                    print '<td style="text-align:left;">';
+                    print '<a class="btn btn-primary" style="width:90px;" href="' . $this->url('user', ['action' => 'edit', 'id' => $user->getId()]) . '"><span class="fa fa-edit"></span> Edit</a>';
+                    print " ";
+                    print '<a class="btn btn-danger" style="width:90px;" href="' . $this->url('user', ['action' => 'delete', 'id' => $user->getId()]) . '"><span class="fa fa-trash-alt"></span> Delete</a>';
+                    print '</td>';
+
+                    print '</tr>';
+                }
+                ?>
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+    $(document).ready(function () {
+
+        $('#contactDataTable').DataTable({
+            "columnDefs": [
+                { "width": "200px", "targets": 3, 'orderable' : false }
+            ]
+
+        });
+    });
+
+</script>

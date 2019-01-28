@@ -1,0 +1,37 @@
+#!/bin/sh
+
+firewall-cmd --list-all
+firewall-cmd --permenant --add-service=smtp
+firewall-cmd --permenant --add-service=smtps
+firewall-cmd --permenant --add-port=993/tcp
+firewall-cmd --permenant --add-port=143/tcp
+firewall-cmd --permenant --add-port=587/tcp
+
+
+#http://www.postfix.org/SASL_README.html#server_sasl_enable
+#http://www.freebsdwiki.net/index.php/SMTP%2C_testing_via_Telnet
+#http://www.anchor.com.au/hosting/dedicated/Postfix-SASL-setup
+#http://www.jetmore.org/john/code/swaks/
+#https://www.linode.com/docs/email/postfix/email-with-postfix-dovecot-and-mariadb-on-centos-7/
+
+
+# tests
+#postmap -q walletsquire.com mysql:/etc/postfix/mysql/virtual_domains.cf 
+#walletsquire.com
+#postmap -q support@walletsquire.com mysql:/etc/postfix/mysql/virtual_aliases.cf 
+#travis.beste@walletsquire.com
+#postmap -q travis.beste@walletsquire.com mysql:/etc/postfix/mysql/virtual_users.cf 
+#travis.beste@walletsquire.com
+
+# https://www.linode.com/docs/email/postfix/email-with-postfix-dovecot-and-mariadb-on-centos-7/
+sudo yum install postfix dovecot dovecot-mysql
+
+groupadd vmail
+useradd -d /var/mail -g vmail -m -c "virtual mail user" vmail
+
+touch /var/log/dovecot.log
+chmod 600 /var/log/dovecot.log
+chown vmail:vmail /var/log/dovecot.log
+
+systemctl start postfix
+systemctl start dovecot

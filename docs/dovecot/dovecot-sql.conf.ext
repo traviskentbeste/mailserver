@@ -1,0 +1,38 @@
+driver = mysql
+connect = host=127.0.0.1 dbname=postfix user=postfix password=postfix
+default_pass_scheme = SHA512-CRYPT
+# to use the alias as the username
+#password_query = SELECT email as user, password FROM virtual_users WHERE email=(SELECT destination FROM virtual_aliases WHERE source = '%u');
+password_query = \
+SELECT \
+	u.username, \
+	d.name, \
+	u.password \
+FROM \
+	user u, \
+	domain d \
+WHERE \
+	u.username = '%n' \
+	AND \
+	d.name = '%d' \
+	AND \
+	d.id = u.domain_id \
+	AND \
+	active = 1
+#--------------------#
+# user query
+#--------------------#
+#user_query = \
+#SELECT \
+#	1 \
+#FROM \
+#	user u, \
+#	domain d \
+#WHERE  \
+#	u.username = '%n'  \
+#	AND  \
+#	d.name='%d' \
+#	AND  \
+#	d.id=u.domain_id \
+#	AND \
+#	active = 1

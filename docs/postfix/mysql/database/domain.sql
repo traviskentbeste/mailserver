@@ -1,0 +1,5 @@
+CREATE TABLE `domain` (
+`id` int(11) NOT NULL AUTO_INCREMENT,
+`name` varchar(128) COLLATE utf8_bin DEFAULT NULL,
+PRIMARY KEY (`id`)
+) ENGINE=InnoDB CHARSET=utf8 COLLATE=utf8_bin;

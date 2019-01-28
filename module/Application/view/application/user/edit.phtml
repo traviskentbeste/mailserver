@@ -1,0 +1,89 @@
+<?php
+/*
+$this->headTitle('Add Contact');
+
+$this->mainMenu()->setActiveItemId('contacts');
+
+$this->pageBreadcrumbs()->setItems([
+    'Home'=>$this->url('home'),
+    'Manage Contacts'=>$this->url('contact'),
+    'Add Contact'=>$this->url('contact', ['action'=>'add'])
+]);
+*/
+
+$form->get('domain')->setAttributes(['class'=>'form-control', 'placeholder'=>'the domain']);
+$form->get('username')->setAttributes(['class'=>'form-control', 'placeholder'=>'username of this user']);
+$form->get('password')->setAttributes(['class'=>'form-control', 'placeholder'=>'super secret password']);
+$form->get('status')->setAttributes(['class'=>'form-control', 'placeholder'=>'the status']);
+
+// buttons
+$form->get('cancel')->setAttributes(['class' => 'btn btn-outline-secondary', 'style' => 'margin-right:10px;']);
+$form->get('save')->setAttributes(['class' => 'btn btn-primary', 'style' => 'margin-right:10px;']);
+$form->get('save_and_edit')->setAttributes(['class' => 'btn btn-info', 'style' => 'margin-right:10px;']);
+
+$form->prepare();
+?>
+
+<div class="container-fluid">
+
+    <div class="row">
+
+        <div class="col-12">
+
+            <h1>Edit Domain</h1>
+
+            <p>
+                Please fill out the following form and click the <i>Save</i> button or the <i>Save And Edit</i> to edit after the save.
+            </p>
+
+            <hr>
+
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-6">
+
+            <?= $this->form()->openTag($form); ?>
+
+            <div class="form-group">
+                <?= $this->formLabel($form->get('domain')); ?>
+                <?= $this->formElement($form->get('domain')); ?>
+                <?= $this->formElementErrors($form->get('domain')); ?>
+            </div>
+
+            <div class="form-group">
+                <?= $this->formLabel($form->get('username')); ?>
+                <?= $this->formElement($form->get('username')); ?>
+                <?= $this->formElementErrors($form->get('username')); ?>
+            </div>
+
+            <div class="form-group">
+                <?= $this->formLabel($form->get('password')); ?>
+                <?= $this->formElement($form->get('password')); ?>
+                <?= $this->formElementErrors($form->get('password')); ?>
+            </div>
+
+            <div class="form-group">
+                <?= $this->formLabel($form->get('status')); ?>
+                <?= $this->formElement($form->get('status')); ?>
+                <?= $this->formElementErrors($form->get('status')); ?>
+            </div>
+
+            <?= $this->formElement($form->get('cancel')); ?>
+            <?= $this->formElement($form->get('save')); ?>
+            <?= $this->formElement($form->get('save_and_edit')); ?>
+
+        </div>
+
+        <div class="col-6">
+
+            &nbsp;
+
+        </div>
+
+    </div>
+
+</div>

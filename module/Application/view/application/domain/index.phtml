@@ -1,0 +1,81 @@
+<?php
+$this->headTitle('Domains');
+
+//$this->mainMenu()->setActiveItemId('contacts');
+
+?>
+
+<div class="container-fluid">
+
+    <div class="row">
+
+        <div class="col-8">
+            <h1>Domains</h1>
+        </div>
+
+        <div class="col-4">
+            <a class="btn btn-primary float-right" href="<?= $this->url('domain', ['action' => 'add']); ?>">
+                <span class="fa fa-plus"></span>&nbsp; Add Domain
+            </a>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-12">
+
+            <hr>
+
+            <table id="contactDataTable" class="display table table-striped" style="width:100%">
+
+                <thead>
+
+                <tr>
+                    <th>Name</th>
+                    <th>&nbsp;</th>
+                </tr>
+
+                </thead>
+
+                <tbody>
+                <?php
+                foreach ($domains as $domain) {
+                    print '<tr>';
+
+                    print '<td>';
+                    print $domain->getName();
+                    print '</td>';
+
+                    print '<td style="text-align:left;">';
+                    print '<a class="btn btn-primary" style="width:90px;" href="' . $this->url('domain', ['action' => 'edit', 'id' => $domain->getId()]) . '"><span class="fa fa-edit"></span> Edit</a>';
+                    print " ";
+                    print '<a class="btn btn-danger" style="width:90px;" href="' . $this->url('domain', ['action' => 'delete', 'id' => $domain->getId()]) . '"><span class="fa fa-trash-alt"></span> Delete</a>';
+                    print '</td>';
+
+                    print '</tr>';
+                }
+                ?>
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+    $(document).ready(function () {
+
+        $('#contactDataTable').DataTable({
+            "columnDefs": [
+                { "width": "200px", "targets": 1, 'orderable' : false }
+            ]
+
+        });
+    });
+
+</script>

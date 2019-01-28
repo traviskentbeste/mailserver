@@ -1,0 +1,13 @@
+#
+user     = postfix
+password = postfix
+hosts    = localhost
+
+#
+dbname   = postfix
+
+#
+result_format = %s
+
+#
+query    = SELECT d.name FROM domain d WHERE d.name=lower('%s')

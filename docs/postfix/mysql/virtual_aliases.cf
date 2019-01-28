@@ -1,0 +1,13 @@
+#
+user = postfix
+password = postfix
+hosts = localhost
+
+#
+dbname = postfix
+
+#
+result_format = %s
+
+#
+query = SELECT a.destination FROM aliases a, user u WHERE a.source=lower('%s') and a.destination=u.email and u.active=1

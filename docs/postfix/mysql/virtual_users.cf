@@ -1,0 +1,13 @@
+#
+user = postfix
+password = postfix
+hosts = localhost
+
+#
+dbname = postfix
+
+#
+result_format=%s
+
+#
+query = SELECT 1 FROM user u, domain d WHERE u.username=lower('%u') and d.name=lower('%d') and u.domain_id=d.id and u.active=1
